@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(this)
         viewPager.adapter = adapter
 
+
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "TAB 1"
@@ -30,5 +31,16 @@ class MainActivity : AppCompatActivity() {
                 else -> null
             }
         }.attach()
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when (position) {
+                    0 -> viewPager.setPageTransformer(CubePageTransformer())
+                    1 -> viewPager.setPageTransformer(MagazinePageTransformer())
+                    2 -> viewPager.setPageTransformer(BookPageTransformer())
+                }
+            }
+        })
     }
 }
