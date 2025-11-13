@@ -5,6 +5,7 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
 
 class MagazinePageTransformer : ViewPager2.PageTransformer {
+
     override fun transformPage(page: View, position: Float) {
         page.cameraDistance = page.width * 10f
 
