@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2
 class CubePageTransformer : ViewPager2.PageTransformer {
     override fun transformPage(page: View, position: Float) {
 
+        page.translationX = 0f
+        page.translationY = 0f
         page.cameraDistance = page.width * 10f
 
         if (position < -1) {

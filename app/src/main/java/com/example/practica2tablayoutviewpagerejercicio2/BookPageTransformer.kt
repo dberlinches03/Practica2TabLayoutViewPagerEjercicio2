@@ -6,7 +6,8 @@ import kotlin.math.abs
 
 class BookPageTransformer : ViewPager2.PageTransformer {
     override fun transformPage(page: View, position: Float) {
-
+        page.translationX = 0f
+        page.translationY = 0f
         page.cameraDistance = page.width * 10f
 
         if (position < -1) {
@@ -19,19 +20,18 @@ class BookPageTransformer : ViewPager2.PageTransformer {
             page.scaleY = 1f
             page.translationZ = 0f
         } else if (position <= 1) {
-            page.rotationY = 0f
+            page.alpha = 1f
+            page.rotationX = 0f
+            page.translationZ = 0f
 
-            page.translationZ = -abs(position) * 10f
+            page.pivotX = if (position < 0) 0f else page.width.toFloat()
+            page.pivotY = page.height * 0.5f
 
-            page.pivotX = page.width * 0.5f
-            page.pivotY = 0f
-            page.rotationX = 60f * position
+            page.rotationY = -45f * position
 
-            val scaleFactor = 0.9f + (1 - abs(position)) * 0.1f
+            val scaleFactor = 0.95f + (1 - abs(position)) * 0.05f
             page.scaleX = scaleFactor
             page.scaleY = scaleFactor
-
-            page.alpha = 1 - abs(position) * 0.3f
         } else {
             page.alpha = 0f
             page.pivotX = page.width * 0.5f
